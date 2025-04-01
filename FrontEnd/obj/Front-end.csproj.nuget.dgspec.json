@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj": {}
+    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/Front-end.csproj": {}
   },
   "projects": {
-    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj": {
+    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/Front-end.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
-        "projectName": "FrontEnd",
-        "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
+        "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/Front-end.csproj",
+        "projectName": "Front-end",
+        "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/Front-end.csproj",
         "packagesPath": "/Users/inesdhouibi/.nuget/packages/",
         "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/obj/",
         "projectStyle": "PackageReference",
@@ -17,14 +17,14 @@
           "/Users/inesdhouibi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Avalonia": {
               "target": "Package",
