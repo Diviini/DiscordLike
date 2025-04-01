@@ -1,7 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:Front_end.ViewModels"
-             x:Class="Front_end.Views.LoginView">
+             xmlns:vm="clr-namespace:FrontEnd.ViewModels"
+             x:Class="FrontEnd.Views.LoginView">
 
   <UserControl.DataContext>
     <vm:LoginViewModel />

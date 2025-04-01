@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "sydb342gstQ=",
   "success": true,
-  "projectFilePath": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj",
+  "projectFilePath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
   "expectedPackageFiles": [
     "/Users/inesdhouibi/.nuget/packages/avalonia/11.2.6/avalonia.11.2.6.nupkg.sha512",
     "/Users/inesdhouibi/.nuget/packages/avalonia.angle.windows.natives/2.1.22045.20230930/avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

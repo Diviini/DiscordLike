@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Front_end.Helpers;
+using FrontEnd.Helpers;
 
-namespace Front_end.ViewModels;
+namespace FrontEnd.ViewModels;
 
 public class LoginViewModel : INotifyPropertyChanged
 {

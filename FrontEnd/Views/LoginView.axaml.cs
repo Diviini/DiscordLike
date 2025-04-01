@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Front_end.Views;
+namespace FrontEnd.Views;
 
 public partial class LoginView : UserControl
 {

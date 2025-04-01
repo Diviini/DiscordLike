@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj": {}
+    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj": {}
   },
   "projects": {
-    "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj": {
+    "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj",
-        "projectName": "Front-end",
-        "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj",
+        "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
+        "projectName": "FrontEnd",
+        "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
         "packagesPath": "/Users/inesdhouibi/.nuget/packages/",
-        "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/obj/",
+        "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/inesdhouibi/.nuget/NuGet/NuGet.Config"

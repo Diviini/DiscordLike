@@ -1,4 +1,4 @@
-﻿namespace Front_end.ViewModels;
+﻿namespace FrontEnd.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {

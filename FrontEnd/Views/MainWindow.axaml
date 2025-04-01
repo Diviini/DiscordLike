@@ -3,7 +3,7 @@
         xmlns:views="clr-namespace:FrontEnd.Views"
         x:Class="FrontEnd.MainWindow"
         Width="500" Height="500"
-        Title="Front-end">
+        Title="FrontEnd">
 
     <views:LoginView />
 </Window>

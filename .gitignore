@@ -1,6 +1,6 @@
-#front-end
-Front-end/obj/
-Front-end/bin/
+#FrontEnd
+FrontEnd/obj/
+FrontEnd/bin/
 
 # Environment variables
 .env

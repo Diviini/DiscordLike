@@ -1,4 +1,4 @@
-namespace Front_end.Models;
+namespace FrontEnd.Models;
 
 public class UserLogin
 {

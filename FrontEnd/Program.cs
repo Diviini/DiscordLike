@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using System;
 
-namespace Front_end;
+namespace FrontEnd;
 
 sealed class Program
 {
