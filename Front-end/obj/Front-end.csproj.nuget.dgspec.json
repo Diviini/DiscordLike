@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ayline/Documents/code/hetic/DiscordLike/Front-end/Front-end.csproj": {}
+    "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj": {}
   },
   "projects": {
-    "/Users/ayline/Documents/code/hetic/DiscordLike/Front-end/Front-end.csproj": {
+    "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ayline/Documents/code/hetic/DiscordLike/Front-end/Front-end.csproj",
+        "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj",
         "projectName": "Front-end",
-        "projectPath": "/Users/ayline/Documents/code/hetic/DiscordLike/Front-end/Front-end.csproj",
-        "packagesPath": "/Users/ayline/.nuget/packages/",
-        "outputPath": "/Users/ayline/Documents/code/hetic/DiscordLike/Front-end/obj/",
+        "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/Front-end.csproj",
+        "packagesPath": "/Users/inesdhouibi/.nuget/packages/",
+        "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/Front-end/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/ayline/.nuget/NuGet/NuGet.Config"
+          "/Users/inesdhouibi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
