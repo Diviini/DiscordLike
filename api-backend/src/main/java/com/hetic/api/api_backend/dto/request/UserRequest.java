@@ -9,11 +9,13 @@ public class UserRequest {
     private Long id;
     private String username;
     private String email;
+    private String password;
 
-    public UserRequest(Long id, String username, String email) {
+    public UserRequest(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.password = password;
     }
 
     public Long getId() {

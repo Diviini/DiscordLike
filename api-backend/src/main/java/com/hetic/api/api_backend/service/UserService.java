@@ -4,6 +4,8 @@ import com.hetic.api.api_backend.dto.response.UserResponse;
 import com.hetic.api.api_backend.model.User;
 import com.hetic.api.api_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,4 +47,21 @@ public class UserService {
         }
         return null;
     }
+
+    public String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            return userDetails.getUsername();
+        } else {
+            return principal.toString(); // fallback
+        }
+    }
+
+
+    public Long getCurrentUserId() {
+        String username = getCurrentUsername();
+        User user = userRepository.findByUsername(username);
+        return user != null ? user.getId() : null;
+    }
+
 }

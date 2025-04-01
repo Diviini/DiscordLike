@@ -5,6 +5,7 @@ import com.hetic.api.api_backend.dto.response.ChatRoomResponse;
 import com.hetic.api.api_backend.dto.response.MessageResponse;
 import com.hetic.api.api_backend.model.ChatRoom;
 import com.hetic.api.api_backend.service.ChatService;
+import com.hetic.api.api_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,13 @@ public class ChatController {
 
     @Autowired
     private ChatService chatService;
+
+    private final UserService userService;
+
+    public ChatController(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @GetMapping
     public ResponseEntity<List<ChatRoomResponse>> getAllChatRooms() {
@@ -36,7 +44,7 @@ public class ChatController {
     public ResponseEntity<MessageResponse> sendMessage(
             @PathVariable Long id,
             @RequestBody MessageRequest messageRequest) {
-        messageRequest.setSenderId(1L); // Utilisez l'ID de l'utilisateur connecté
+        messageRequest.setSenderId(userService.getCurrentUserId());
         MessageResponse response = chatService.sendMessage(id, messageRequest);
         if (response != null) {
             return ResponseEntity.ok(response);
