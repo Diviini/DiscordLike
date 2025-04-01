@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Front_end.ViewModels"
+             x:Class="Front_end.Views.LoginView">
+
+  <UserControl.DataContext>
+    <vm:LoginViewModel />
+  </UserControl.DataContext>
+
+  <Grid>
+    <Border Background="#1E1E1E" CornerRadius="12" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <StackPanel Width="300" Spacing="12">
+        <TextBlock Text="Connexion"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Foreground="White"/>
+
+        <TextBox Watermark="Email"
+                 Text="{Binding Email, Mode=TwoWay}"
+                 Background="#2D2D30"
+                 Foreground="White"
+                 BorderBrush="#3C3C3C"/>
+
+        <TextBox Watermark="Mot de passe"
+                 Text="{Binding Password, Mode=TwoWay}"
+                 PasswordChar="●"
+                 Background="#2D2D30"
+                 Foreground="White"
+                 BorderBrush="#3C3C3C"/>
+
+        <Button Content="Se connecter"
+                Command="{Binding LoginCommand}"
+                IsEnabled="{Binding CanLogin}"
+                Background="#007ACC"
+                Foreground="White"
+                Padding="8"
+                HorizontalAlignment="Stretch"/>
+
+        <TextBlock Text="{Binding Message}" Foreground="Salmon" FontSize="12"/>
+      </StackPanel>
+
+    </Border>
+  </Grid>
+</UserControl>
