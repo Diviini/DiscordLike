@@ -1479,19 +1479,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/inesdhouibi/.nuget/packages/": {}
+    "/Users/ayline/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
+      "projectUniqueName": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/FrontEnd.csproj",
       "projectName": "FrontEnd",
-      "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
-      "packagesPath": "/Users/inesdhouibi/.nuget/packages/",
-      "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/obj/",
+      "projectPath": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/FrontEnd.csproj",
+      "packagesPath": "/Users/ayline/.nuget/packages/",
+      "outputPath": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/inesdhouibi/.nuget/NuGet/NuGet.Config"
+        "/Users/ayline/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1509,13 +1509,7 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.200"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -1562,7 +1556,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet@8/8.0.14_1/libexec/sdk/8.0.114/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:FrontEnd.ViewModels"
+             xmlns:components="clr-namespace:FrontEnd.Components;assembly=FrontEnd"
+             x:Class="FrontEnd.Views.HomeView">
+
+  <UserControl.DataContext>
+    <vm:HomeViewModel />
+  </UserControl.DataContext>
+
+  <Grid ColumnDefinitions="200, *" Background="#D2D2D2">
+    
+    <!-- Sidebar -->
+    <components:Sidebar Grid.Column="0"/>
+
+    <Grid Grid.Column="1" RowDefinitions="*, Auto">
+      <!-- Messages -->
+      <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Messages}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <components:Message DataContext="{Binding}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+
+      <!-- Input + Send Button -->
+      <Border Grid.Row="1" Background="White" Padding="10">
+        <Grid ColumnDefinitions="*, Auto">
+         <!-- Input Field -->
+        <TextBox x:Name="MessageInput"
+                 Grid.Row="1" Grid.Column="0"
+                 Watermark="Type your message here..."
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Center"
+                 Text="{Binding Message, Mode=TwoWay}"
+                 Margin="0 0 10 0" />
+
+        <!-- Send Button -->
+        <Button Content="Send"
+                Grid.Row="1" Grid.Column="1"
+                Width="100"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Command="{Binding SendMessageCommand}" />
+        </Grid>
+      </Border>
+
+    </Grid>
+
+  </Grid>
+</UserControl>
