@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "messages")
-public class Message {
+@Table(name = "private_messages")
+public class PrivateMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,8 @@ public class Message {
     private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "chat_room_id")
-    private ChatRoom chatRoom;
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
     @Column(nullable = false)
     private String content;
@@ -39,20 +39,16 @@ public class Message {
         return sender;
     }
 
-    public Long getSenderId() {
-        return sender.getId();
-    }
-
     public void setSender(User sender) {
         this.sender = sender;
     }
 
-    public ChatRoom getChatRoom() {
-        return chatRoom;
+    public User getReceiver() {
+        return receiver;
     }
 
-    public void setChatRoom(ChatRoom chatRoom) {
-        this.chatRoom = chatRoom;
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public String getContent() {

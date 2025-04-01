@@ -25,4 +25,12 @@ public class MessageRequest {
     public void setChatRoomId(Long chatRoomId) {
         this.chatRoomId = chatRoomId;
     }
+
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
