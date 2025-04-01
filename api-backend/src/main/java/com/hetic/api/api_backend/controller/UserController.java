@@ -24,9 +24,10 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+        return userService.getAllUsers();
     }
+
 
     /*
     // Route pour récupérer le profil de l'utilisateur connecté
