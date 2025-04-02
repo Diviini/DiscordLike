@@ -23,15 +23,21 @@ namespace FrontEnd
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
                 DisableAvaloniaDataAnnotationValidation();
 
                 // Load JSON data
                 string jsonData = File.ReadAllText("conv.json");
                 var conversations = JsonSerializer.Deserialize<List<Conversation>>(jsonData);
+
                 // Initialize the HomeViewModel with the loaded data
                 var homeViewModel = new HomeViewModel();
                 homeViewModel.LoadData(conversations);
+
+                // Load JSON data from test.json
+                string testJsonData = File.ReadAllText("test.json");
+                var testData = JsonSerializer.Deserialize<TestData>(testJsonData);
+                homeViewModel.Test = testData?.Title;
+                Console.WriteLine($"TestData loaded: {testData?.Title}");
 
                 desktop.MainWindow = new MainWindow
                 {
@@ -41,6 +47,7 @@ namespace FrontEnd
 
             base.OnFrameworkInitializationCompleted();
         }
+
 
         private void DisableAvaloniaDataAnnotationValidation()
         {

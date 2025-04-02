@@ -1,14 +1,27 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+
 using FrontEnd.Views;
 
 namespace FrontEnd.ViewModels;
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
-    private object _currentView;
+    private object _currentView = new HomeView();
+    private string _test;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public string Test
+    {
+        get => _test;
+        set
+        {
+            _test = value;
+            OnPropertyChanged(nameof(Test));
+            Console.WriteLine($"title: {_test}");
+        }
+    }
     public object CurrentView
     {
         get => _currentView;

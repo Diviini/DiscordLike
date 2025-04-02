@@ -7,5 +7,6 @@
 
     <!-- <views:LoginView /> -->
     <ContentControl Content="{Binding CurrentView}" />
+    <!-- <TextBlock Text="{Binding Test}" FontWeight="Bold" Margin="5" Foreground="#000000"/> -->
 
 </Window>

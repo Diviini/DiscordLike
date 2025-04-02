@@ -12,10 +12,22 @@ namespace FrontEnd.ViewModels;
 
 public class HomeViewModel : INotifyPropertyChanged
 {
+  private string _test = "Default Title";
   private string _message = "";
   private ConversationViewModel? _selectedConversation;
-
   public ObservableCollection<ConversationViewModel> Conversations { get; } = new();
+
+  public string Test
+  {
+    get => _test;
+    set
+    {
+      _test = value;
+      OnPropertyChanged(nameof(Test));
+      Console.WriteLine($"title: {_test}");
+    }
+  }
+
   public ConversationViewModel? SelectedConversation
   {
     get => _selectedConversation;
@@ -65,6 +77,8 @@ public class HomeViewModel : INotifyPropertyChanged
 
     // Select the first conversation by default
     SelectedConversation = Conversations.FirstOrDefault();
+    Console.WriteLine($"Selected conversation: {SelectedConversation?.Title}");
+    OnPropertyChanged(nameof(Messages));
   }
 
   private void ExecuteSendMessage()
@@ -100,5 +114,7 @@ public class HomeViewModel : INotifyPropertyChanged
 
   public event PropertyChangedEventHandler? PropertyChanged;
   protected void OnPropertyChanged([CallerMemberName] string propertyName = null!)
-      => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+  {
+    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+  }
 }
