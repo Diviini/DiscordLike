@@ -1,11 +1,9 @@
-// src/main/java/com/hetic/api/api_backend/controller/AuthController.java
 package com.hetic.api.api_backend.controller;
 
-import com.hetic.api.api_backend.dto.request.AuthRequest;
+import com.hetic.api.api_backend.dto.request.UserRequest;
 import com.hetic.api.api_backend.model.User;
 import com.hetic.api.api_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,26 +18,27 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody AuthRequest request) {
-        if (userRepository.findByUsername(request.getUsername()) != null) {
-            return ResponseEntity.badRequest().body("Username already exists");
-        }
+    public String registerUser(@RequestBody UserRequest userRequest) {
+        System.out.println("Register endpoint hit.");
+        System.out.println("Registering user: " + userRequest.getUsername());
 
         User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(user);
+        user.setUsername(userRequest.getUsername());
+        user.setEmail(userRequest.getEmail());
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
-        return ResponseEntity.ok("User registered successfully");
+        User savedUser = userRepository.save(user);
+        System.out.println("User registered: " + savedUser.getUsername());
+
+        return "User registered successfully!";
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest request) {
-        User user = userRepository.findByUsername(request.getUsername());
-        if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
 
-        return ResponseEntity.ok("Login successful");
+
+    // Route pour la connexion (Spring Security gère cela automatiquement)
+    @PostMapping("/login")
+    public String login() {
+        System.out.println("Login attempt.");
+        return "Please use HTTP Basic Auth for login.";
     }
 }
