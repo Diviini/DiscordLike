@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using FrontEnd.ViewModels;
 
 namespace FrontEnd
 {
@@ -7,6 +8,7 @@ namespace FrontEnd
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

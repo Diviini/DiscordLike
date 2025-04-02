@@ -1,9 +1,12 @@
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Linq;
+using System.Collections.Generic;
 using CommunityToolkit.Mvvm.Input;
+using FrontEnd.Models;
 
 namespace FrontEnd.ViewModels;
 
@@ -48,13 +51,19 @@ public class HomeViewModel : INotifyPropertyChanged
     SendMessageCommand = new RelayCommand(ExecuteSendMessage);
     CreateConversationCommand = new RelayCommand(ExecuteCreateConversation);
     SelectConversationCommand = new RelayCommand<ConversationViewModel>(ExecuteSelectConversation);
+  }
 
-    // Sample conversations
-    Conversations.Add(new ConversationViewModel("Conv1"));
-    Conversations.Add(new ConversationViewModel("Conv2"));
-    Conversations.Add(new ConversationViewModel("Conv3"));
+  public void LoadData(List<Conversation> conversations)
+  {
+    foreach (var conversation in conversations)
+    {
+      Console.WriteLine($"conversations: {conversation.Title}");
+      var chatRoom = new ConversationViewModel(conversation.Title);
+      chatRoom.LoadFakeData(new List<Conversation> { conversation });
+      Conversations.Add(chatRoom);
+    }
 
-    // Select first conversation by default
+    // Select the first conversation by default
     SelectedConversation = Conversations.FirstOrDefault();
   }
 
@@ -65,8 +74,11 @@ public class HomeViewModel : INotifyPropertyChanged
     SelectedConversation.Messages.Add(new MessageViewModel
     {
       MessageText = Message,
-      Sender = "Me"
+      Sender = "Me",
+      Date = DateTime.Now
     });
+
+    Console.WriteLine($"conv: {Message}");
 
     Message = "";
     OnPropertyChanged(nameof(Messages));
@@ -78,7 +90,6 @@ public class HomeViewModel : INotifyPropertyChanged
     Conversations.Add(newConv);
     SelectedConversation = newConv;
   }
-
   private void ExecuteSelectConversation(ConversationViewModel? conversation)
   {
     if (conversation != null)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fSMpv4BH+X0YzAxJ4c+Q9gYUaI2CXk28R3lwnrCxxuPRaicgmhBioLnzIC1Yp57skF7T5hADOPes4YiuaqxLGA==",
+  "dgSpecHash": "PSrzTVIFg0thcOLoLtXPn0XIDzLCUc7GJJHcr4Pis7LTP8lorVe4jlPrM3uYNu+lrOt0BS2aKqzIe3GXBbcrRg==",
   "success": true,
   "projectFilePath": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/FrontEnd.csproj",
   "expectedPackageFiles": [
@@ -32,7 +32,9 @@
     "/Users/ayline/.nuget/packages/skiasharp.nativeassets.macos/2.88.9/skiasharp.nativeassets.macos.2.88.9.nupkg.sha512",
     "/Users/ayline/.nuget/packages/skiasharp.nativeassets.webassembly/2.88.9/skiasharp.nativeassets.webassembly.2.88.9.nupkg.sha512",
     "/Users/ayline/.nuget/packages/skiasharp.nativeassets.win32/2.88.9/skiasharp.nativeassets.win32.2.88.9.nupkg.sha512",
-    "/Users/ayline/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
+    "/Users/ayline/.nuget/packages/system.io.pipelines/9.0.3/system.io.pipelines.9.0.3.nupkg.sha512",
+    "/Users/ayline/.nuget/packages/system.text.encodings.web/9.0.3/system.text.encodings.web.9.0.3.nupkg.sha512",
+    "/Users/ayline/.nuget/packages/system.text.json/9.0.3/system.text.json.9.0.3.nupkg.sha512",
     "/Users/ayline/.nuget/packages/tmds.dbus.protocol/0.20.0/tmds.dbus.protocol.0.20.0.nupkg.sha512"
   ],
   "logs": []
