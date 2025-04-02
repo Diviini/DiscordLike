@@ -1,16 +1,19 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+// using FrontEnd.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using FrontEnd.Helpers;
+using FrontEnd.Models;
+using FrontEnd.Services;
+
+
 
 namespace FrontEnd.ViewModels;
 
-public class LoginViewModel : INotifyPropertyChanged
+public class LoginViewModel : ViewModelBase
 {
     private string _email = "";
-    private string _password = "";
-    private string _message = "";
-
     public string Email
     {
         get => _email;
@@ -18,10 +21,11 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             _email = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(CanLogin));
+            (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
     }
 
+    private string _password = "";
     public string Password
     {
         get => _password;
@@ -29,38 +33,54 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             _password = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(CanLogin));
+            (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
     }
 
+    private string _message = "";
     public string Message
     {
         get => _message;
-        set { _message = value; OnPropertyChanged(); }
+        set
+        {
+            _message = value;
+            OnPropertyChanged();
+        }
     }
 
+    private readonly MainWindowViewModel _mainWindow;
     public ICommand LoginCommand { get; }
 
-    public bool CanLogin => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
-
-    public LoginViewModel()
+    private readonly List<UserLogin> fakeUsers = new()
     {
-        LoginCommand = new RelayCommand(ExecuteLogin);
+        new UserLogin { Email = "ines@mail.com", Password = "123456" },
+        new UserLogin { Email = "test@mail.com", Password = "abcdef" }
+    };
+
+    public LoginViewModel(MainWindowViewModel mainWindow)
+    {
+        _mainWindow = mainWindow;
+        LoginCommand = new RelayCommand(ExecuteLogin, CanLogin);
     }
 
-    private void ExecuteLogin(object? obj)
+    private bool CanLogin(object? parameter)
     {
-        if (!CanLogin)
+        return !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
+    }
+
+    private async void ExecuteLogin(object? parameter)
+    {
+        var isMatch = fakeUsers.Any(u => u.Email == Email && u.Password == Password);
+
+        if (isMatch)
         {
-            Message = "Remplis tous les champs queen 😅";
-            return;
+            Message = $"Bienvenue Queen {Email} 👑 (fake login réussi)";
+            await Task.Delay(3000);
+            _mainWindow.CurrentView = new HomeViewModel();
         }
-
-        Message = $"Bienvenue {Email} 👑";
-        // 👉 ici on pourra ajouter la navigation vers une autre vue
+        else
+        {
+            Message = "Identifiants incorrects ❌";
+        }
     }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }
