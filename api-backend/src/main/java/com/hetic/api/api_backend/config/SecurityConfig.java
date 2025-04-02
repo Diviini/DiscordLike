@@ -20,19 +20,19 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // Ajoutez cette méthode à votre classe existante
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        System.out.println("Configuring SecurityFilterChain.");
-
         http
-                .csrf(csrf -> csrf.disable()) // Désactive CSRF
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/register", "/auth/login").permitAll()
+                        .requestMatchers("/auth/register", "/auth/login", "/ws/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults()); // Utilise l'authentification HTTP Basic
+                .httpBasic(withDefaults());
 
-        System.out.println("SecurityFilterChain configured.");
         return http.build();
     }
+
+
 }
