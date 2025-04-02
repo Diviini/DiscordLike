@@ -34,7 +34,7 @@ public class WebSocketController {
     public void handlePublicMessage(MessageRequest messageRequest, Principal principal) {
         System.out.println("Message public reçu de " + principal.getName() + ": " + messageRequest.toString());
         String username = principal.getName();
-        Long userId = userService.getCurrentUserId();
+        Long userId = userService.getCurrentUserId(principal);
 
         messageRequest.setSenderId(userId);
         messageRequest.setType(MessageRequest.MessageType.PUBLIC);
@@ -57,7 +57,7 @@ public class WebSocketController {
     public void handlePrivateMessage(MessageRequest messageRequest, Principal principal) {
         System.out.println("Message privé reçu de " + principal.getName() + " à " + messageRequest.getReceiverId());
         String username = principal.getName();
-        Long senderId = userService.getCurrentUserId();
+        Long senderId = userService.getCurrentUserId(principal);
 
         messageRequest.setSenderId(senderId);
         messageRequest.setType(MessageRequest.MessageType.PRIVATE);

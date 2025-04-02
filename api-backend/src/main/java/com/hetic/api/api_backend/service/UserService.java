@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,14 @@ public class UserService {
         } else {
             return principal.toString(); // fallback
         }
+    }
+
+    public Long getCurrentUserId(Principal principal) {
+        if (principal == null) {
+            return null; // ou une valeur par défaut si approprié
+        }
+        User user = userRepository.findByUsername(principal.getName());
+        return user != null ? user.getId() : null;
     }
 
 
