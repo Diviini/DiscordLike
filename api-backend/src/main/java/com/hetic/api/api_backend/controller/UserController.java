@@ -6,6 +6,8 @@ import com.hetic.api.api_backend.repository.UserRepository;
 import com.hetic.api.api_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,18 +30,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-
-    /*
     // Route pour récupérer le profil de l'utilisateur connecté
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getLoggedUser() {
-        UserResponse loggedUser = userService.getLoggedInUser();
-        if (loggedUser != null) {
-            return ResponseEntity.ok(loggedUser);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-    }*/
+    public ResponseEntity<UserResponse> getMyProfile() {
+        Long userId = userService.getCurrentUserId();
+        if (userId == null) return ResponseEntity.status(401).build();
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
 
     // Route pour récupérer un utilisateur par son ID
     @GetMapping("/{id}")

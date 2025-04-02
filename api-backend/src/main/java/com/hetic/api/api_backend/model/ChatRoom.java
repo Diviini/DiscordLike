@@ -22,13 +22,16 @@ public class ChatRoom {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @ManyToMany(mappedBy = "chatRooms")
+    @ManyToMany
+    @JoinTable(
+            name = "user_chat_room",
+            joinColumns = @JoinColumn(name = "chat_room_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private Set<User> users;
 
-    @OneToMany(mappedBy = "chatRoom")
-    private Set<Message> messages;
-
     // Getters and Setters
+
 
     public Long getId() {
         return id;
@@ -68,13 +71,5 @@ public class ChatRoom {
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
-
-    public Set<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
     }
 }
