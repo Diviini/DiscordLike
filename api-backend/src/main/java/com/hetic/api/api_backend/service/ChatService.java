@@ -5,9 +5,11 @@ import com.hetic.api.api_backend.dto.response.ChatRoomResponse;
 import com.hetic.api.api_backend.dto.response.MessageResponse;
 import com.hetic.api.api_backend.model.ChatRoom;
 import com.hetic.api.api_backend.model.Message;
+import com.hetic.api.api_backend.model.PrivateMessage;
 import com.hetic.api.api_backend.model.User;
 import com.hetic.api.api_backend.repository.ChatRoomRepository;
 import com.hetic.api.api_backend.repository.MessageRepository;
+import com.hetic.api.api_backend.repository.PrivateMessageRepository;
 import com.hetic.api.api_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class ChatService {
     private MessageRepository messageRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PrivateMessageRepository privateMessageRepository;
 
 
     public List<ChatRoomResponse> getAllChatRooms() {
@@ -51,6 +55,31 @@ public class ChatService {
         }
         return null;
     }
+
+    // Ajoutez cette méthode à votre classe existante
+    public MessageResponse sendPrivateMessage(Long receiverId, MessageRequest messageRequest) {
+        User sender = userRepository.findById(messageRequest.getSenderId()).orElse(null);
+        User receiver = userRepository.findById(receiverId).orElse(null);
+
+        if (sender != null && receiver != null) {
+            PrivateMessage privateMessage = new PrivateMessage();
+            privateMessage.setSender(sender);
+            privateMessage.setReceiver(receiver);
+            privateMessage.setContent(messageRequest.getContent());
+            privateMessage.setSentAt(LocalDateTime.now());
+
+            PrivateMessage savedMessage = privateMessageRepository.save(privateMessage);
+
+            return new MessageResponse(
+                    savedMessage.getId(),
+                    savedMessage.getContent(),
+                    sender.getId(),
+                    savedMessage.getSentAt()
+            );
+        }
+        return null;
+    }
+
 
     public List<MessageResponse> getMessagesByChatRoomId(Long chatRoomId) {
         List<Message> messages = messageRepository.findByChatRoomId(chatRoomId);
