@@ -4,6 +4,8 @@
         x:Class="FrontEnd.MainWindow"
         Width="800" Height="600" 
         Title="FrontEnd">
+                <!-- x:Class="FrontEnd.Views.MainWindow" -->
+
 
     <!-- <views:LoginView /> -->
     <ContentControl Content="{Binding CurrentView}" />
