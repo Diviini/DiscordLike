@@ -1,11 +1,13 @@
 package com.hetic.api.api_backend.controller;
 
-import com.hetic.api.api_backend.dto.request.MessageRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hetic.api.api_backend.dto.request.MessagePublicRequest;
 import com.hetic.api.api_backend.dto.response.ChatRoomResponse;
 import com.hetic.api.api_backend.dto.response.MessageResponse;
 import com.hetic.api.api_backend.model.ChatRoom;
 import com.hetic.api.api_backend.service.ChatService;
 import com.hetic.api.api_backend.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +18,22 @@ import java.util.List;
 @RequestMapping("/chat")
 public class ChatController {
 
+    @JsonIgnore
+    private HttpSession session;
+
     @Autowired
     private ChatService chatService;
 
     private final UserService userService;
 
-    public ChatController(UserService userService) {
+
+    public ChatController(UserService userService, HttpSession session) {
         this.userService = userService;
+        this.session = session;
+    }
+
+    public HttpSession getSession() {
+        return session;
     }
 
 
@@ -43,9 +54,13 @@ public class ChatController {
     @PostMapping("/{id}/message")
     public ResponseEntity<MessageResponse> sendMessage(
             @PathVariable Long id,
-            @RequestBody MessageRequest messageRequest) {
-        messageRequest.setSenderId(userService.getCurrentUserId());
-        MessageResponse response = chatService.sendMessage(id, messageRequest);
+            @RequestBody MessagePublicRequest messageRequest) {
+
+        Long userId = (Long) this.getSession().getAttribute("userId");
+
+
+        messageRequest.setSenderId(userId);
+        MessageResponse response = chatService.sendPublicMessage(id, messageRequest);
         if (response != null) {
             return ResponseEntity.ok(response);
         } else {
