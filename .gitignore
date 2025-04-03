@@ -1,7 +1,7 @@
-#FrontEnd
+#frontEnd
 FrontEnd/obj/
-FrontEnd/obj/Debug/
 FrontEnd/bin/
+FrontEnd/obj/Debug/
 
 # Environment variables
 .env

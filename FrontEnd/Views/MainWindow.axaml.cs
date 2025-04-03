@@ -1,14 +1,13 @@
 using Avalonia.Controls;
 using FrontEnd.ViewModels;
 
-namespace FrontEnd
+namespace FrontEnd.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = new MainWindowViewModel();
-        }
+        InitializeComponent();
+        DataContext = new MainWindowViewModel();
     }
 }

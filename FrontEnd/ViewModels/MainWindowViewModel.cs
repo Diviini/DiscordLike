@@ -1,59 +1,22 @@
-﻿using System;
-using System.ComponentModel;
-
-using FrontEnd.Views;
+using FrontEnd.ViewModels;
 
 namespace FrontEnd.ViewModels;
 
-public class MainWindowViewModel : INotifyPropertyChanged
+public class MainWindowViewModel : ViewModelBase
 {
-	private object _currentView;
-	private string _test;
-	private HomeViewModel _homeViewModel;
-
-	public event PropertyChangedEventHandler? PropertyChanged;
-
-	public string Test
-	{
-		get => _test;
-		set
-		{
-			_test = value;
-			OnPropertyChanged(nameof(Test));
-		}
-	}
-
-	public object CurrentView
+	private ViewModelBase _currentView;
+	public ViewModelBase CurrentView
 	{
 		get => _currentView;
-		private set
+		set
 		{
 			_currentView = value;
-			OnPropertyChanged(nameof(CurrentView));
+			OnPropertyChanged();
 		}
 	}
 
 	public MainWindowViewModel()
 	{
-		UpdateView();
+		CurrentView = new LoginViewModel(this); // ✅ start with login
 	}
-
-	public void SetHomeViewModel(HomeViewModel homeViewModel)
-	{
-		_homeViewModel = homeViewModel;
-		UpdateView();
-	}
-
-	private void UpdateView()
-	{
-		var homeView = new HomeView();
-		if (_homeViewModel != null)
-		{
-			homeView.DataContext = _homeViewModel;
-		}
-		CurrentView = homeView;
-	}
-
-	protected void OnPropertyChanged(string propertyName)
-			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }

@@ -1,12 +1,8 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:FrontEnd.Views"
-        x:Class="FrontEnd.MainWindow"
-        Width="800" Height="600" 
+        x:Class="FrontEnd.Views.MainWindow"
+        Width="600" Height="500"
         Title="FrontEnd">
 
-    <!-- <views:LoginView /> -->
     <ContentControl Content="{Binding CurrentView}" />
-    <!-- <TextBlock Text="{Binding Test}" FontWeight="Bold" Margin="5" Foreground="#000000"/> -->
-
-</Window>
+</Window> 
