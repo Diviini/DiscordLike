@@ -1,12 +1,38 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<!-- <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="FrontEnd.Views.HomeView">
   <StackPanel Margin="30" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
     <TextBlock Text="Bienvenue sur l'accueil 🏠"
                FontSize="24"
                HorizontalAlignment="Center" />
-    <TextBlock Text="Tu es connecté 👑"
+    <TextBlock Text="Tu es connecté(e) 👑"
                FontSize="16"
                HorizontalAlignment="Center" />
+  </StackPanel>
+</UserControl> -->
+
+
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="FrontEnd.Views.HomeView">
+  <StackPanel Margin="30" Spacing="10">
+
+ <TextBlock Text="Bienvenue dans le ChatApp 💬" FontSize="24" FontWeight="Bold"/>
+
+    <TextBlock FontSize="18">
+        <Run Text="Votre Username:"/>
+        <Run Text="{Binding Username}"/>
+    </TextBlock>  
+
+    <TextBlock FontSize="16">
+        <Run Text="Votre Email:"/>
+        <Run Text="{Binding Email}"/>
+    </TextBlock>  
+
+    <TextBlock FontSize="14">
+  <Run Text="ID : "/>
+  <Run Text="{Binding UserId}"/>
+</TextBlock>
+
   </StackPanel>
 </UserControl>

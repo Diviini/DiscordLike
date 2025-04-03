@@ -43,8 +43,8 @@
 
     <StackPanel Margin="20">
         <TextBox
-            Text="{Binding Email, Mode=TwoWay}"
-            Watermark="Adresse e-mail"
+            Text="{Binding Username, Mode=TwoWay}"
+            Watermark="Nom d'utilisateur"
             Margin="0,10,0,10"
             HorizontalAlignment="Stretch" />
 

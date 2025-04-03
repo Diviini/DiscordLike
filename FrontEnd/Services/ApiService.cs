@@ -43,7 +43,7 @@ namespace FrontEnd.Services
         public async Task<bool> RegisterUserAsync(User user)
         {
             // Adjust the endpoint as needed.
-            var response = await _httpClient.PostAsJsonAsync("/api/register", user);
+            var response = await _httpClient.PostAsJsonAsync("/auth/register", user);
             return response.IsSuccessStatusCode;
         }
 
@@ -51,7 +51,7 @@ namespace FrontEnd.Services
         public async Task<LoginResponse?> LoginAsync(UserLogin login)
         {
             // Adjust the endpoint as needed.
-            var response = await _httpClient.PostAsJsonAsync("/api/login", login);
+            var response = await _httpClient.PostAsJsonAsync("/auth/login", login);
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<LoginResponse>();
