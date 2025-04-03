@@ -54,7 +54,8 @@ public class LoginViewModel : ViewModelBase
 	private readonly List<UserLogin> fakeUsers = new()
 		{
 				new UserLogin { Email = "ines@mail.com", Password = "123456" },
-				new UserLogin { Email = "test@mail.com", Password = "abcdef" }
+				new UserLogin { Email = "test@mail.com", Password = "abcdef" },
+				new UserLogin { Email = "1", Password = "1" }
 		};
 
 	public LoginViewModel(MainWindowViewModel mainWindow)
@@ -76,7 +77,9 @@ public class LoginViewModel : ViewModelBase
 		{
 			Message = $"Bienvenue Queen {Email} 👑 (fake login réussi)";
 			await Task.Delay(3000);
-			_mainWindow.CurrentView = new HomeViewModel();
+			var homeViewModel = new HomeViewModel();
+			// Load your conversations data here if needed
+			_mainWindow.CurrentView = homeViewModel;
 		}
 		else
 		{

@@ -17,7 +17,7 @@ public class HomeViewModel : ViewModelBase
   private string _message = "";
   private ConversationViewModel? _selectedConversation;
   public ObservableCollection<ConversationViewModel> Conversations { get; } = new();
-
+  // public ObservableCollection<Conversation> Conversations { get; set; } = new ObservableCollection<Conversation>();
   public string Test
   {
     get => _test;
@@ -93,7 +93,7 @@ public class HomeViewModel : ViewModelBase
       Date = DateTime.Now
     });
 
-    Console.WriteLine($"conv: {Message}");
+    Console.WriteLine($"message: {Message}");
 
     Message = "";
     OnPropertyChanged(nameof(Messages));

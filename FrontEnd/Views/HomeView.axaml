@@ -4,9 +4,9 @@
              xmlns:components="clr-namespace:FrontEnd.Components;assembly=FrontEnd"
              x:Class="FrontEnd.Views.HomeView">
 
-  <UserControl.DataContext>
+  <!-- <UserControl.DataContext>
     <vm:HomeViewModel />
-  </UserControl.DataContext>
+  </UserControl.DataContext> -->
 
   <Grid ColumnDefinitions="200, *" Background="#D2D2D2">
     

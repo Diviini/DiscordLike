@@ -39,9 +39,13 @@ namespace FrontEnd
                 homeViewModel.Test = testData?.Title;
                 Console.WriteLine($"TestData loaded: {testData?.Title}");
 
+                // Set the DataContext of MainWindow to MainWindowViewModel
+                var mainWindowViewModel = new MainWindowViewModel();
+                mainWindowViewModel.CurrentView = homeViewModel;
+
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = mainWindowViewModel
                 };
             }
 
