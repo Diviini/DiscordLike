@@ -8,11 +8,7 @@ public class MainWindowViewModel : ViewModelBase
 	public ViewModelBase CurrentView
 	{
 		get => _currentView;
-		set
-		{
-			_currentView = value;
-			OnPropertyChanged();
-		}
+		set => SetProperty(ref _currentView, value);
 	}
 
 	public MainWindowViewModel()

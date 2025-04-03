@@ -1,26 +1,3 @@
-// using System.Net.Http;
-// using System.Text;
-// using System.Text.Json;
-// using System.Threading.Tasks;
-// using FrontEnd.Models;
-// using System;
-
-// namespace FrontEnd.Services;
-
-// public class ApiService
-// {
-//     private readonly HttpClient _httpClient = new();
-
-//     public async Task<bool> LoginAsync(UserLogin login)
-//     {
-//         var json = JsonSerializer.Serialize(login);
-//         var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-//         var response = await _httpClient.PostAsync("http://localhost:8080/api/login", content);
-//         return response.IsSuccessStatusCode;
-//     }
-// }
-
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -58,5 +35,6 @@ namespace FrontEnd.Services
             }
             return null;
         }
+
     }
 }

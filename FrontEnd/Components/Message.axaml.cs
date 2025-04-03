@@ -1,23 +1,12 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace FrontEnd.Components;
-
-public partial class Message : UserControl
+namespace FrontEnd.Components
 {
-  public Message()
+  public partial class Message : UserControl
   {
-    InitializeComponent();
-    DataContext = this;
+    public Message()
+    {
+      InitializeComponent();
+    }
   }
-  public new string MessageText
-  {
-    get => GetValue(MessageTextProperty);
-    set => SetValue(MessageTextProperty, value);
-  }
-
-  public static readonly StyledProperty<string> MessageTextProperty =
-      AvaloniaProperty.Register<Message, string>(nameof(MessageText));
 }
-

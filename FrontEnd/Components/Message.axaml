@@ -1,15 +1,14 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="FrontEnd.Components.Message">
-    
+
     <Border Background="#ffffff" CornerRadius="8" Padding="10" Margin="5">
         <StackPanel>
-          <StackPanel Spacing="5">
-            <TextBlock Text="{Binding Sender}" FontWeight="Bold" Foreground="Blue"/>
-            <TextBlock Text="{Binding Date, StringFormat='hh:mm:ss tt'}" Foreground="Gray"/>
-          </StackPanel>
-          <TextBlock Text="{Binding MessageText, Mode=OneWay}" Foreground="#000000" TextWrapping="Wrap" />
+            <StackPanel Spacing="5">
+                <TextBlock Text="{Binding SenderId}" FontWeight="Bold" Foreground="Blue"/>
+                <TextBlock Text="{Binding SentAt, StringFormat='hh:mm:ss tt'}" Foreground="Gray"/>
+            </StackPanel>
+            <TextBlock Text="{Binding Content, Mode=OneWay}" Foreground="#000000" TextWrapping="Wrap" />
         </StackPanel>
     </Border>
-
 </UserControl>

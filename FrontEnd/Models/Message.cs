@@ -1,19 +1,20 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace FrontEnd.Models;
-
-public class Message
+namespace FrontEnd.Models
 {
-  [JsonPropertyName("content")]
-  public string MessageText { get; set; }
+  public class Message
+  {
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
 
-  [JsonPropertyName("date")]
-  public DateTime Date { get; set; }
+    [JsonPropertyName("content")]
+    public string Content { get; set; }
 
-  [JsonPropertyName("sender_id")]
-  public int SenderId { get; set; }
+    [JsonPropertyName("senderId")]
+    public string SenderId { get; set; }
 
-  [JsonPropertyName("username")]
-  public string Sender { get; set; }
+    [JsonPropertyName("sentAt")]
+    public DateTime SentAt { get; set; }
+  }
 }

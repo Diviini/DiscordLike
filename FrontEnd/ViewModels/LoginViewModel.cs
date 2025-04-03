@@ -71,7 +71,8 @@ public class LoginViewModel : ViewModelBase
         {
             Message = $"Bienvenue Queen {user.Username} 👑";
             await Task.Delay(2500);
-            _mainWindow.CurrentView = new HomeViewModel(user);
+            var chatService = new ChatService();
+            _mainWindow.CurrentView = new HomeViewModel(user, chatService);
         }
         else
         {
