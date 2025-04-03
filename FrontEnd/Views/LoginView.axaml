@@ -37,7 +37,7 @@
 </StackPanel>
 
 </UserControl> -->
-<UserControl xmlns="https://github.com/avaloniaui"
+<!-- <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="FrontEnd.Views.LoginView">
 
@@ -72,4 +72,50 @@
             HorizontalAlignment="Center"/>
     </StackPanel>
 
+    <TextBlock Text="Créer un compte"
+           Foreground="LightBlue"
+           Cursor="Hand"
+           HorizontalAlignment="Center">
+  <TextBlock.Gestures>
+    <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
+  </TextBlock.Gestures>
+</TextBlock>
+
+
+</UserControl> -->
+
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="FrontEnd.Views.LoginView">
+  <Border Background="Black" Padding="40">
+    <StackPanel Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+      <TextBlock Text="Connexion vers MyOnlyChat 🔐"
+                 FontSize="24"
+                 FontWeight="Bold"
+                 Foreground="White"
+                 HorizontalAlignment="Center" />
+
+      <!-- Bouton pour accéder à la page Register -->
+      <Button Content="Créer un compte"
+              Command="{Binding NavigateToRegisterCommand}"
+              Background="Transparent"
+              BorderThickness="0"
+              Foreground="LightBlue"
+              HorizontalAlignment="Center"
+              Cursor="Hand" />
+
+      <TextBox Watermark="Nom d’utilisateur" Text="{Binding Username, Mode=TwoWay}" />
+      <TextBox Watermark="Mot de passe" Text="{Binding Password, Mode=TwoWay}" PasswordChar="●" />
+
+      <Button Content="Se connecter"
+              Command="{Binding LoginCommand}"
+              Background="#007BFF"
+              Foreground="White"
+              />
+
+      <TextBlock Text="{Binding Message}" Foreground="Red" HorizontalAlignment="Center" />
+
+    </StackPanel>
+  </Border>
 </UserControl>

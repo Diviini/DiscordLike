@@ -1,6 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="FrontEnd.App"
+             xmlns:conv="clr-namespace:FrontEnd.Converters"
+             xmlns:view="clr-namespace:FrontEnd"
              xmlns:local="clr-namespace:FrontEnd"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -8,6 +10,13 @@
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
+
+   <Application.Resources>
+  <conv:MessageToColorConverter x:Key="MessageToColorConverter"/>
+  <view:ViewLocator x:Key="ViewLocator"/>
+</Application.Resources>
+
+
   
     <Application.Styles>
         <FluentTheme />
