@@ -1,31 +1,28 @@
 package com.hetic.api.api_backend.dto.response;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
-public class MessageResponse {
+public class PrivateMessageResponse {
     private Long id;
     private String content;
     private Long senderId;
+    private Long receiverId;
     private LocalDateTime sentAt;
-    private Long chatId;
 
-    public MessageResponse(Long id, String content, Long senderId, LocalDateTime sentAt, Long chatId) {
+    public PrivateMessageResponse(Long id, String content, Long senderId, LocalDateTime sentAt, Long receiverId) {
         this.id = id;
         this.content = content;
         this.senderId = senderId;
         this.sentAt = sentAt;
-        this.chatId = chatId;
+        this.receiverId = receiverId;
     }
 
-    public Long getChatId() {
-        return chatId;
+    public Long getReceiverId() {
+        return receiverId;
     }
 
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
     }
 
     public Long getId() {
