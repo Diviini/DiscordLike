@@ -6,11 +6,12 @@ using System.Windows.Input;
 using System.Linq;
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FrontEnd.Models;
 
 namespace FrontEnd.ViewModels;
 
-public class HomeViewModel : INotifyPropertyChanged
+public class HomeViewModel : ViewModelBase
 {
   private string _test = "Default Title";
   private string _message = "";
