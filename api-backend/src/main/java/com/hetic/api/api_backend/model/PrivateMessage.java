@@ -25,8 +25,19 @@ public class PrivateMessage {
     @Column(name = "sent_at")
     private LocalDateTime sentAt;
 
-    // Getters and Setters
+    public PrivateMessage() {
 
+    }
+
+    public PrivateMessage(Long id, String content, User sender, LocalDateTime sentAt, User receiver) {
+        this.id = id;
+        this.content = content;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.sentAt = sentAt;
+    }
+
+    // Getters et Setters
     public Long getId() {
         return id;
     }

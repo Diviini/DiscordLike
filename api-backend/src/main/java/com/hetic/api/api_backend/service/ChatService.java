@@ -1,8 +1,10 @@
 package com.hetic.api.api_backend.service;
 
-import com.hetic.api.api_backend.dto.request.MessageRequest;
+import com.hetic.api.api_backend.dto.request.MessagePrivateRequest;
+import com.hetic.api.api_backend.dto.request.MessagePublicRequest;
 import com.hetic.api.api_backend.dto.response.ChatRoomResponse;
 import com.hetic.api.api_backend.dto.response.MessageResponse;
+import com.hetic.api.api_backend.dto.response.PrivateMessageResponse;
 import com.hetic.api.api_backend.model.ChatRoom;
 import com.hetic.api.api_backend.model.Message;
 import com.hetic.api.api_backend.model.PrivateMessage;
@@ -56,31 +58,6 @@ public class ChatService {
         return null;
     }
 
-    // Ajoutez cette méthode à votre classe existante
-    public MessageResponse sendPrivateMessage(Long receiverId, MessageRequest messageRequest) {
-        User sender = userRepository.findById(messageRequest.getSenderId()).orElse(null);
-        User receiver = userRepository.findById(receiverId).orElse(null);
-
-        if (sender != null && receiver != null) {
-            PrivateMessage privateMessage = new PrivateMessage();
-            privateMessage.setSender(sender);
-            privateMessage.setReceiver(receiver);
-            privateMessage.setContent(messageRequest.getContent());
-            privateMessage.setSentAt(LocalDateTime.now());
-
-            PrivateMessage savedMessage = privateMessageRepository.save(privateMessage);
-
-            return new MessageResponse(
-                    savedMessage.getId(),
-                    savedMessage.getContent(),
-                    sender.getId(),
-                    savedMessage.getSentAt()
-            );
-        }
-        return null;
-    }
-
-
     public List<MessageResponse> getMessagesByChatRoomId(Long chatRoomId) {
         List<Message> messages = messageRepository.findByChatRoomId(chatRoomId);
         return messages.stream()
@@ -88,7 +65,8 @@ public class ChatService {
                         message.getId(),
                         message.getContent(),
                         message.getSenderId(),
-                        message.getSentAt()
+                        message.getSentAt(),
+                        message.getChatRoom().getId()
                 ))
                 .collect(Collectors.toList());
     }
@@ -105,8 +83,10 @@ public class ChatService {
         return null;
     }
 
-    public MessageResponse sendMessage(Long chatRoomId, MessageRequest messageRequest) {
+    public MessageResponse sendPublicMessage(Long chatRoomId, MessagePublicRequest messageRequest) {
+        System.out.println("MESSAGE PUBLIQUE");
         ChatRoom chatRoom = chatRoomRepository.findById(chatRoomId).orElse(null);
+        System.out.println(messageRequest.toString());
         User sender = userRepository.findById(messageRequest.getSenderId()).orElse(null);
 
         if (chatRoom != null && sender != null) {
@@ -118,7 +98,27 @@ public class ChatService {
 
             Message savedMessage = messageRepository.save(message);
 
-            return new MessageResponse(savedMessage.getId(), savedMessage.getContent(), sender.getId(), savedMessage.getSentAt());
+            return new MessageResponse(savedMessage.getId(), savedMessage.getContent(), sender.getId(), savedMessage.getSentAt(), chatRoom.getId());
+        }
+        return null;
+    }
+
+    public PrivateMessageResponse sendPrivateMessage(Long chatRoomId, MessagePrivateRequest messageRequest) {
+        System.out.println("MESSAGE PRIVEE");
+        System.out.println(messageRequest.toString());
+        User sender = userRepository.findById(messageRequest.getSenderId()).orElse(null);
+        User receiver = userRepository.findById(messageRequest.getReceiverId()).orElse(null);
+
+        if (receiver != null && sender != null) {
+            PrivateMessage message = new PrivateMessage();
+            message.setContent(messageRequest.getContent());
+            message.setSender(sender);
+            message.setReceiver(receiver);
+            message.setSentAt(LocalDateTime.now());
+
+            PrivateMessage savedMessage = privateMessageRepository.save(message);
+
+            return new PrivateMessageResponse(savedMessage.getId(), savedMessage.getContent(), sender.getId(), savedMessage.getSentAt(), receiver.getId());
         }
         return null;
     }

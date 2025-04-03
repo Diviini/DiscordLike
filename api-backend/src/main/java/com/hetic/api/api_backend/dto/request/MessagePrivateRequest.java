@@ -7,10 +7,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class MessageRequest {
+public class MessagePrivateRequest {
     private Long senderId;
-    private Long receiverId; // Nouveau champ pour les messages privés
-    private Long chatRoomId;
+    private Long receiverId;
     private String content;
     private MessageType type; // Nouveau champ pour distinguer le type de message
     private LocalDateTime timestamp; // Nouveau champ
@@ -27,13 +26,7 @@ public class MessageRequest {
         return senderId;
     }
 
-    public Long getChatRoomId() {
-        return chatRoomId;
-    }
 
-    public void setChatRoomId(Long chatRoomId) {
-        this.chatRoomId = chatRoomId;
-    }
 
     public void setSenderId(Long senderId) {
         this.senderId = senderId;
@@ -72,7 +65,6 @@ public class MessageRequest {
         return "MessageRequest{" +
                 "senderId=" + senderId +
                 ", receiverId=" + receiverId +
-                ", chatRoomId=" + chatRoomId +
                 ", content='" + content + '\'' +
                 ", type=" + type +
                 ", timestamp=" + timestamp +

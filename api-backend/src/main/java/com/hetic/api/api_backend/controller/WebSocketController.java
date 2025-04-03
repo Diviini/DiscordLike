@@ -1,14 +1,17 @@
 package com.hetic.api.api_backend.controller;
 
-import com.hetic.api.api_backend.dto.request.MessageRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hetic.api.api_backend.dto.request.MessagePrivateRequest;
+import com.hetic.api.api_backend.dto.request.MessagePublicRequest;
 import com.hetic.api.api_backend.dto.response.MessageResponse;
+import com.hetic.api.api_backend.dto.response.PrivateMessageResponse;
+import com.hetic.api.api_backend.model.User;
 import com.hetic.api.api_backend.service.ChatService;
 import com.hetic.api.api_backend.service.PrivateChatService;
 import com.hetic.api.api_backend.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -18,30 +21,35 @@ import java.time.LocalDateTime;
 @Controller
 public class WebSocketController {
 
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    private final SimpMessagingTemplate messagingTemplate;
+    private final ChatService chatService;
+    private final PrivateChatService privateChatService;
+    private final UserService userService;
 
     @Autowired
-    private ChatService chatService;
-
-    @Autowired
-    private PrivateChatService privateChatService;
-
-    @Autowired
-    private UserService userService;
+    public WebSocketController(SimpMessagingTemplate messagingTemplate,
+                               ChatService chatService,
+                               PrivateChatService privateChatService,
+                               UserService userService) {
+        this.messagingTemplate = messagingTemplate;
+        this.chatService = chatService;
+        this.privateChatService = privateChatService;
+        this.userService = userService;
+    }
 
     @MessageMapping("/chat/public")
-    public void handlePublicMessage(MessageRequest messageRequest, Principal principal) {
-        System.out.println("Message public reçu de " + principal.getName() + ": " + messageRequest.toString());
-        String username = principal.getName();
-        Long userId = userService.getCurrentUserId(principal);
+    public void handlePublicMessage(MessagePublicRequest messageRequest, Principal principal) {
+        // Validation
+        if (messageRequest.getContent() == null || messageRequest.getContent().trim().isEmpty()) {
+            throw new IllegalArgumentException("Message content cannot be empty");
+        }
 
-        messageRequest.setSenderId(userId);
-        messageRequest.setType(MessageRequest.MessageType.PUBLIC);
+        // Ajout des métadonnées
         messageRequest.setTimestamp(LocalDateTime.now());
+        messageRequest.setType(MessagePublicRequest.MessageType.PUBLIC);
 
         // Enregistrement en base
-        MessageResponse savedMessage = chatService.sendMessage(
+        MessageResponse savedMessage = chatService.sendPublicMessage(
                 messageRequest.getChatRoomId(),
                 messageRequest
         );
@@ -54,55 +62,27 @@ public class WebSocketController {
     }
 
     @MessageMapping("/chat/private")
-    public void handlePrivateMessage(MessageRequest messageRequest, Principal principal) {
-        System.out.println("Message privé reçu de " + principal.getName() + " à " + messageRequest.getReceiverId());
+    public void handlePrivateMessage(MessagePrivateRequest messageRequest, Principal principal) {
+// 1. Validation
+        if (principal == null) {
+            throw new IllegalArgumentException("User not authenticated");
+        }
+
+        // 2. Récupération de l'expéditeur
         String username = principal.getName();
-        Long senderId = userService.getCurrentUserId(principal);
+        User sender = userService.findByUsername(username);
 
-        messageRequest.setSenderId(senderId);
-        messageRequest.setType(MessageRequest.MessageType.PRIVATE);
-        messageRequest.setTimestamp(LocalDateTime.now());
-
-        // Enregistrement en base
-        MessageResponse savedMessage = privateChatService.sendPrivateMessage(
+        // 3. Enregistrement + envoi
+        PrivateMessageResponse response = privateChatService.sendPrivateMessage(
                 messageRequest.getReceiverId(),
-                messageRequest
+                messageRequest, // Utilisez l'ID du Principal, pas celui du body
+                principal
         );
 
-        // Envoi au destinataire
         messagingTemplate.convertAndSendToUser(
                 messageRequest.getReceiverId().toString(),
                 "/queue/private",
-                savedMessage
+                response
         );
-
-        // Copie à l'expéditeur
-        messagingTemplate.convertAndSendToUser(
-                senderId.toString(),
-                "/queue/private",
-                savedMessage
-        );
-    }
-
-    @MessageMapping("/chat/typing")
-    public void handleTypingNotification(MessageRequest messageRequest, Principal principal) {
-        Long userId = userService.getCurrentUserId();
-        messageRequest.setType(MessageRequest.MessageType.NOTIFICATION);
-        messageRequest.setContent(principal.getName() + " is typing...");
-
-        if (messageRequest.getChatRoomId() != null) {
-            // Notification dans un salon public
-            messagingTemplate.convertAndSend(
-                    "/topic/room." + messageRequest.getChatRoomId() + ".typing",
-                    messageRequest
-            );
-        } else if (messageRequest.getReceiverId() != null) {
-            // Notification dans un chat privé
-            messagingTemplate.convertAndSendToUser(
-                    messageRequest.getReceiverId().toString(),
-                    "/queue/typing",
-                    messageRequest
-            );
-        }
     }
 }
