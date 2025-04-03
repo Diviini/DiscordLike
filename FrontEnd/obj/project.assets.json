@@ -1701,9 +1701,9 @@
       "Avalonia.Fonts.Inter >= 11.2.6",
       "Avalonia.Themes.Fluent >= 11.2.6",
       "CommunityToolkit.Mvvm >= 8.2.1",
-      "System.Text.Json >= 9.0.3",
       "Newtonsoft.Json >= 13.0.3",
-      "RestSharp >= 112.1.0"
+      "RestSharp >= 112.1.0",
+      "System.Text.Json >= 9.0.3"
     ]
   },
   "packageFolders": {
@@ -1712,11 +1712,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
+      "projectUniqueName": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/FrontEnd.csproj",
       "projectName": "FrontEnd",
-      "projectPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/FrontEnd.csproj",
-      "packagesPath": "/Users/inesdhouibi/.nuget/packages/",
-      "outputPath": "/Users/inesdhouibi/Documents/DiscordLike/FrontEnd/obj/",
+      "projectPath": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/FrontEnd.csproj",
+      "packagesPath": "/Users/ayline/.nuget/packages/",
+      "outputPath": "/Users/ayline/Documents/code/hetic/DiscordLike/FrontEnd/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/ayline/.nuget/NuGet/NuGet.Config"
@@ -1767,10 +1767,6 @@
             "target": "Package",
             "version": "[8.2.1, )"
           },
-          "System.Text.Json": {
-            "target": "Package",
-            "version": "[9.0.3, )",
-            
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
@@ -1778,6 +1774,10 @@
           "RestSharp": {
             "target": "Package",
             "version": "[112.1.0, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[9.0.3, )"
           }
         },
         "imports": [
