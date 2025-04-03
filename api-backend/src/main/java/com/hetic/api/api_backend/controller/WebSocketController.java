@@ -62,27 +62,36 @@ public class WebSocketController {
     }
 
     @MessageMapping("/chat/private")
-    public void handlePrivateMessage(MessagePrivateRequest messageRequest, Principal principal) {
-// 1. Validation
+    public void handlePrivateMessage(MessagePrivateRequest messageRequest,
+                                     Principal principal) {
+        // 1. Validation de l'authentification
         if (principal == null) {
-            throw new IllegalArgumentException("User not authenticated");
+            throw new IllegalStateException("User must be authenticated");
         }
 
-        // 2. Récupération de l'expéditeur
-        String username = principal.getName();
-        User sender = userService.findByUsername(username);
+        // 2. Récupération et vérification de l'expéditeur
+        User sender = userService.findByUsername(principal.getName());
 
-        // 3. Enregistrement + envoi
-        PrivateMessageResponse response = privateChatService.sendPrivateMessage(
+        // 3. Vérification du destination
+        if (messageRequest.getReceiverId() == null) {
+            throw new IllegalArgumentException("Receiver ID cannot be null");
+        }
+
+        // 4. Enregistrement du message
+        PrivateMessageResponse response = privateChatService.createPrivateMessage(
+                sender.getId(),
                 messageRequest.getReceiverId(),
-                messageRequest, // Utilisez l'ID du Principal, pas celui du body
-                principal
+                messageRequest.getContent()
         );
 
+        // 5. Envoi ciblé au destinataire
         messagingTemplate.convertAndSendToUser(
-                messageRequest.getReceiverId().toString(),
-                "/queue/private",
-                response
+                messageRequest.getReceiverId().toString(), // ID du destinataire
+                "/queue/private",                        // Destination fixe
+                response                                // Objet message
         );
+
+        // Log de confirmation
+        System.out.println("Message privé envoyé de " + sender.getId() + " à " + messageRequest.getReceiverId() + " : " + messageRequest.getContent());
     }
 }
