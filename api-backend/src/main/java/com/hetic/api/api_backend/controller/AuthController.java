@@ -36,7 +36,7 @@ public class AuthController {
 
 
     // Route pour la connexion (Spring Security gère cela automatiquement)
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String login() {
         System.out.println("Login attempt.");
         return "Please use HTTP Basic Auth for login.";
