@@ -29,19 +29,23 @@ namespace FrontEnd
                 string jsonData = File.ReadAllText("conv.json");
                 var conversations = JsonSerializer.Deserialize<List<Conversation>>(jsonData);
 
-                // Initialize the HomeViewModel with the loaded data
                 var homeViewModel = new HomeViewModel();
                 homeViewModel.LoadData(conversations);
 
-                // Load JSON data from test.json
                 string testJsonData = File.ReadAllText("test.json");
                 var testData = JsonSerializer.Deserialize<TestData>(testJsonData);
+
                 homeViewModel.Test = testData?.Title;
-                Console.WriteLine($"TestData loaded: {testData?.Title}");
+
+                var mainWindowViewModel = new MainWindowViewModel
+                {
+                    Test = testData?.Title
+                };
+                mainWindowViewModel.SetHomeViewModel(homeViewModel);
 
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = mainWindowViewModel
                 };
             }
 

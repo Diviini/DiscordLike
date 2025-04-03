@@ -7,42 +7,53 @@ namespace FrontEnd.ViewModels;
 
 public class MainWindowViewModel : INotifyPropertyChanged
 {
-    private object _currentView = new HomeView();
-    private string _test;
+	private object _currentView;
+	private string _test;
+	private HomeViewModel _homeViewModel;
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+	public event PropertyChangedEventHandler? PropertyChanged;
 
-    public string Test
-    {
-        get => _test;
-        set
-        {
-            _test = value;
-            OnPropertyChanged(nameof(Test));
-            Console.WriteLine($"title: {_test}");
-        }
-    }
-    public object CurrentView
-    {
-        get => _currentView;
-        private set
-        {
-            _currentView = value;
-            OnPropertyChanged(nameof(CurrentView));
-        }
-    }
+	public string Test
+	{
+		get => _test;
+		set
+		{
+			_test = value;
+			OnPropertyChanged(nameof(Test));
+		}
+	}
 
-    public MainWindowViewModel()
-    {
-        UpdateView();
-    }
+	public object CurrentView
+	{
+		get => _currentView;
+		private set
+		{
+			_currentView = value;
+			OnPropertyChanged(nameof(CurrentView));
+		}
+	}
 
-    private void UpdateView()
-    {
-        CurrentView = new HomeView();
-        // CurrentView = new LoginView();
-    }
+	public MainWindowViewModel()
+	{
+		UpdateView();
+	}
 
-    protected void OnPropertyChanged(string propertyName)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	public void SetHomeViewModel(HomeViewModel homeViewModel)
+	{
+		_homeViewModel = homeViewModel;
+		UpdateView();
+	}
+
+	private void UpdateView()
+	{
+		var homeView = new HomeView();
+		if (_homeViewModel != null)
+		{
+			homeView.DataContext = _homeViewModel;
+		}
+		CurrentView = homeView;
+	}
+
+	protected void OnPropertyChanged(string propertyName)
+			=> PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
