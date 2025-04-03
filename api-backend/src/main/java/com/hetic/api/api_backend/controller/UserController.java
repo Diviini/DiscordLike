@@ -4,13 +4,16 @@ import com.hetic.api.api_backend.dto.response.UserResponse;
 import com.hetic.api.api_backend.model.User;
 import com.hetic.api.api_backend.repository.UserRepository;
 import com.hetic.api.api_backend.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -30,12 +33,24 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    // Route pour récupérer le profil de l'utilisateur connecté
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> getMyProfile() {
-        Long userId = userService.getCurrentUserId();
-        if (userId == null) return ResponseEntity.status(401).build();
-        return ResponseEntity.ok(userService.getUserById(userId));
+    public ResponseEntity<Map<String, Object>> getMyProfile(HttpSession session) {
+        // Récupération des infos en session
+        Object userId = session.getAttribute("userId");
+        Object username = session.getAttribute("username");
+        Object email = session.getAttribute("email");
+
+        if (userId == null || username == null || email == null) {
+            return ResponseEntity.status(401).build(); // Pas connecté
+        }
+
+        // Construire un JSON propre avec les infos demandées
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("userId", userId);
+        userInfo.put("username", username);
+        userInfo.put("email", email);
+
+        return ResponseEntity.ok(userInfo);
     }
 
     // Route pour récupérer un utilisateur par son ID
