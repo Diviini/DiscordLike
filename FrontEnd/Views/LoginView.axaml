@@ -1,45 +1,35 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:FrontEnd.ViewModels"
              x:Class="FrontEnd.Views.LoginView">
+  <Border Background="Black" Padding="40">
+    <StackPanel Spacing="20" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-  <UserControl.DataContext>
-    <vm:LoginViewModel />
-  </UserControl.DataContext>
-
-  <Grid>
-    <Border Background="#1E1E1E" CornerRadius="12" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center">
-      <StackPanel Width="300" Spacing="12">
-        <TextBlock Text="Connexion"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Foreground="White"/>
-
-        <TextBox Watermark="Email"
-                 Text="{Binding Email, Mode=TwoWay}"
-                 Background="#2D2D30"
+      <TextBlock Text="Connexion vers MyOnlyChat 🔐"
+                 FontSize="24"
+                 FontWeight="Bold"
                  Foreground="White"
-                 BorderBrush="#3C3C3C"/>
+                 HorizontalAlignment="Center" />
 
-        <TextBox Watermark="Mot de passe"
-                 Text="{Binding Password, Mode=TwoWay}"
-                 PasswordChar="●"
-                 Background="#2D2D30"
-                 Foreground="White"
-                 BorderBrush="#3C3C3C"/>
+      <!-- Bouton pour accéder à la page Register -->
+      <Button Content="Créer un compte"
+              Command="{Binding NavigateToRegisterCommand}"
+              Background="Transparent"
+              BorderThickness="0"
+              Foreground="LightBlue"
+              HorizontalAlignment="Center"
+              Cursor="Hand" />
 
-        <Button Content="Se connecter"
-                Command="{Binding LoginCommand}"
-                IsEnabled="{Binding CanLogin}"
-                Background="#007ACC"
-                Foreground="White"
-                Padding="8"
-                HorizontalAlignment="Stretch"/>
+      <TextBox Watermark="Nom d’utilisateur" Text="{Binding Username, Mode=TwoWay}" />
+      <TextBox Watermark="Mot de passe" Text="{Binding Password, Mode=TwoWay}" PasswordChar="●" />
 
-        <TextBlock Text="{Binding Message}" Foreground="Salmon" FontSize="12"/>
-      </StackPanel>
+      <Button Content="Se connecter"
+              Command="{Binding LoginCommand}"
+              Background="#007BFF"
+              Foreground="White"
+              />
 
-    </Border>
-  </Grid>
+      <TextBlock Text="{Binding Message}" Foreground="Red" HorizontalAlignment="Center" />
+
+    </StackPanel>
+  </Border>
 </UserControl>

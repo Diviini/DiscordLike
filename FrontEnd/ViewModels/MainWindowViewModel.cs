@@ -1,6 +1,28 @@
-﻿namespace FrontEnd.ViewModels;
+﻿using FrontEnd.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+namespace FrontEnd.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    private ViewModelBase _currentView;
+    public ViewModelBase CurrentView
+    {
+        get => _currentView;
+        set
+        {
+            _currentView = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public MainWindowViewModel()
+    {
+        CurrentView = new LoginViewModel(this); // ✅ start with login
+    }
 }
+
+// public ViewModelBase CurrentView
+// {
+// 	get => _currentView;
+// 	set => SetProperty(ref _currentView, value);
+// }

@@ -1,27 +1,31 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System;
 using System.Windows.Input;
+using System.Threading.Tasks;
 using FrontEnd.Helpers;
+using FrontEnd.Models;
+using FrontEnd.Services;
 
 namespace FrontEnd.ViewModels;
 
-public class LoginViewModel : INotifyPropertyChanged
+public class LoginViewModel : ViewModelBase
 {
-    private string _email = "";
-    private string _password = "";
-    private string _message = "";
+    private readonly MainWindowViewModel _mainWindow;
+    private readonly AuthService _authService = new();
+    //
 
-    public string Email
+    private string _username = "";
+    public string Username
     {
-        get => _email;
+        get => _username;
         set
         {
-            _email = value;
+            _username = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(CanLogin));
+            (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
     }
 
+    private string _password = "";
     public string Password
     {
         get => _password;
@@ -29,38 +33,51 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             _password = value;
             OnPropertyChanged();
-            OnPropertyChanged(nameof(CanLogin));
+            (LoginCommand as RelayCommand)?.RaiseCanExecuteChanged();
         }
     }
 
+    private string _message = "";
     public string Message
     {
         get => _message;
-        set { _message = value; OnPropertyChanged(); }
+        set
+        {
+            _message = value;
+            OnPropertyChanged();
+        }
     }
 
     public ICommand LoginCommand { get; }
+    public ICommand NavigateToRegisterCommand { get; }
 
-    public bool CanLogin => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
-
-    public LoginViewModel()
+    public LoginViewModel(MainWindowViewModel mainWindow)
     {
-        LoginCommand = new RelayCommand(ExecuteLogin);
-    }
-
-    private void ExecuteLogin(object? obj)
-    {
-        if (!CanLogin)
+        _mainWindow = mainWindow;
+        LoginCommand = new RelayCommand(async _ => await ExecuteLoginAsync(), CanLogin);
+        NavigateToRegisterCommand = new RelayCommand(_ =>
         {
-            Message = "Remplis tous les champs queen 😅";
-            return;
-        }
-
-        Message = $"Bienvenue {Email} 👑";
-        // 👉 ici on pourra ajouter la navigation vers une autre vue
+            Console.WriteLine("🔁 Navigation vers la RegisterView");
+            _mainWindow.CurrentView = new RegisterViewModel(_mainWindow);
+        });
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string name = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private bool CanLogin(object? parameter)
+    {
+        return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
+    }
+
+    private async Task ExecuteLoginAsync()
+    {
+        var (success, msg, user) = await _authService.LoginAndGetUserInfo(Username, Password);
+        Message = msg;
+
+        if (success && user is not null)
+        {
+            await Task.Delay(1000);
+            var chatService = new ChatService();
+            _mainWindow.CurrentView = new HomeViewModel(user, chatService);
+        }
+    }
 }
+

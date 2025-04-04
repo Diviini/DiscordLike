@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FrontEnd.Components"
+             x:Class="FrontEnd.Views.HomeView">
+
+    <Grid ColumnDefinitions="200, *" Background="#D2D2D2">
+        <!-- ChatRooms Component -->
+        <local:ChatRooms DataContext="{Binding ChatRoomsViewModel}" />
+
+        <!-- Messages Section -->
+        <Grid Grid.Column="1" RowDefinitions="*, Auto">
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding SelectedConversation.Messages}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:Message DataContext="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Input + Send Button -->
+            <Border Grid.Row="1" Background="White" Padding="10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <!-- Input Field -->
+                    <TextBox x:Name="MessageInput"
+                              Grid.Row="1" Grid.Column="0"
+                              Watermark="Type your message here..."
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Text="{Binding NewMessageText, Mode=TwoWay}"
+                              Margin="0 0 10 0" />
+
+                    <!-- Send Button -->
+                    <Button Content="Send"
+                            Grid.Row="1" Grid.Column="1"
+                            Width="100"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Command="{Binding SendMessageCommand}" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
