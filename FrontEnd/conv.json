@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Conver1",
+    "chat_room_id": 1,
+    "messages": [
+      {
+        "content": "je suis un message",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 1,
+        "username": "Me"
+      },
+      {
+        "content": "je suis un message2",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 1,
+        "username": "Me"
+      },
+      {
+        "content": "je suis un message3 send by user 2",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 2,
+        "username": "You"
+      }
+    ]
+  },
+  {
+    "title": "Conver2",
+    "chat_room_id": 2,
+    "messages": [
+      {
+        "content": "je suis un message de la conv 2",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 1,
+        "username": "Me"
+      },
+      {
+        "content": "je suis un message2",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 1,
+        "username": "Me"
+      },
+      {
+        "content": "je suis un message3 send by user 2",
+        "date": "2025-04-01T14:09:06.332126",
+        "sender_id": 2,
+        "username": "You"
+      }
+    ]
+  }
+]

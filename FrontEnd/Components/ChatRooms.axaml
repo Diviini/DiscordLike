@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="FrontEnd.Components.ChatRooms">
+
+  <Border Background="#2D2D30" Width="200" Padding="10">
+    <StackPanel Background="#EEE" Width="200">
+      <!-- Create Conversation Button -->
+      <Button Content="New Conversation"
+              Command="{Binding CreateConversationCommand}"
+              Margin="5"/>
+
+      <!-- List of Conversations -->
+      <ItemsControl ItemsSource="{Binding Conversations}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Button Content="{Binding Name}"
+                    Command="{Binding DataContext.SelectConversationCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    CommandParameter="{Binding}"
+                    Margin="5"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+    </StackPanel>
+  </Border>
+
+</UserControl>

@@ -18,7 +18,6 @@ public class RelayCommand : ICommand
 
     public void Execute(object? parameter) => _execute(parameter);
 
-    // ⚠️ Ne pas désactiver cet event → il est écouté par Avalonia !
     public event EventHandler? CanExecuteChanged;
 
     public void RaiseCanExecuteChanged()

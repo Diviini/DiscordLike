@@ -11,6 +11,7 @@ public class LoginViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainWindow;
     private readonly AuthService _authService = new();
+    //
 
     private string _username = "";
     public string Username
@@ -75,6 +76,11 @@ public class LoginViewModel : ViewModelBase
         {
             await Task.Delay(1000);
             _mainWindow.CurrentView = new HomeViewModel(user);
+
+            // Message = $"Bienvenue Queen {user.Username} 👑";
+            // await Task.Delay(2500);
+            // var chatService = new ChatService();
+            // _mainWindow.CurrentView = new HomeViewModel(user, chatService);
         }
     }
 }

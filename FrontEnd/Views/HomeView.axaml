@@ -1,24 +1,51 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FrontEnd.Components"
              x:Class="FrontEnd.Views.HomeView">
-  <StackPanel Margin="30" Spacing="10">
 
- <TextBlock Text="Bienvenue dans MyOnlyChat 💬" FontSize="24" FontWeight="Bold"/>
-
+    <TextBlock Text="Bienvenue dans MyOnlyChat 💬" FontSize="24" FontWeight="Bold"/>
     <TextBlock FontSize="16">
         <Run Text="Votre Username:"/>
         <Run Text="{Binding Username}"/>
     </TextBlock>  
 
-    <TextBlock FontSize="16">
-        <Run Text="Votre Email:"/>
-        <Run Text="{Binding Email}"/>
-    </TextBlock>  
+    <Grid ColumnDefinitions="200, *" Background="#D2D2D2">
+        <!-- ChatRooms Component -->
+        <local:ChatRooms DataContext="{Binding ChatRoomsViewModel}" />
 
-    <TextBlock FontSize="14">
-  <Run Text="ID : "/>
-  <Run Text="{Binding UserId}"/>
-</TextBlock>
+        <!-- Messages Section -->
+        <Grid Grid.Column="1" RowDefinitions="*, Auto">
+            <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding SelectedConversation.Messages}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:Message DataContext="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
-  </StackPanel>
+            <!-- Input + Send Button -->
+            <Border Grid.Row="1" Background="White" Padding="10">
+                <Grid ColumnDefinitions="*, Auto">
+                    <!-- Input Field -->
+                    <TextBox x:Name="MessageInput"
+                              Grid.Row="1" Grid.Column="0"
+                              Watermark="Type your message here..."
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              Text="{Binding NewMessageText, Mode=TwoWay}"
+                              Margin="0 0 10 0" />
+
+                    <!-- Send Button -->
+                    <Button Content="Send"
+                            Grid.Row="1" Grid.Column="1"
+                            Width="100"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Command="{Binding SendMessageCommand}" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>

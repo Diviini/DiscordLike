@@ -20,3 +20,9 @@ public class MainWindowViewModel : ViewModelBase
         CurrentView = new LoginViewModel(this); // ✅ start with login
     }
 }
+
+// public ViewModelBase CurrentView
+// {
+// 	get => _currentView;
+// 	set => SetProperty(ref _currentView, value);
+// }
