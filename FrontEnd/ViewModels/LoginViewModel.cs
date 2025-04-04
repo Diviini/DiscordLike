@@ -75,12 +75,8 @@ public class LoginViewModel : ViewModelBase
         if (success && user is not null)
         {
             await Task.Delay(1000);
-            _mainWindow.CurrentView = new HomeViewModel(user);
-
-            // Message = $"Bienvenue Queen {user.Username} 👑";
-            // await Task.Delay(2500);
-            // var chatService = new ChatService();
-            // _mainWindow.CurrentView = new HomeViewModel(user, chatService);
+            var chatService = new ChatService();
+            _mainWindow.CurrentView = new HomeViewModel(user, chatService);
         }
     }
 }

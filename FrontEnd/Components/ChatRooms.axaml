@@ -4,12 +4,19 @@
 
   <Border Background="#2D2D30" Width="200" Padding="10">
     <StackPanel Background="#EEE" Width="200">
-      <!-- Create Conversation Button -->
+      
+      <StackPanel Width="200">
+        <TextBlock Text="Bienvenue dans MyOnlyChat 💬" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
+        <TextBlock FontSize="16">
+            <Run Text="Votre Username:"/>
+            <Run Text="{Binding Username}"/>
+        </TextBlock>
+      </StackPanel>
+
       <Button Content="New Conversation"
               Command="{Binding CreateConversationCommand}"
               Margin="5"/>
 
-      <!-- List of Conversations -->
       <ItemsControl ItemsSource="{Binding Conversations}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>

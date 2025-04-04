@@ -6,6 +6,7 @@ namespace FrontEnd.Models
 {
   public class Conversation
   {
+    public string Username { get; set; }
     [JsonPropertyName("id")]
     public int Id { get; set; }
 

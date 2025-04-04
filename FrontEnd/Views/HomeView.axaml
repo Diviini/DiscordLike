@@ -3,12 +3,6 @@
              xmlns:local="clr-namespace:FrontEnd.Components"
              x:Class="FrontEnd.Views.HomeView">
 
-    <TextBlock Text="Bienvenue dans MyOnlyChat 💬" FontSize="24" FontWeight="Bold"/>
-    <TextBlock FontSize="16">
-        <Run Text="Votre Username:"/>
-        <Run Text="{Binding Username}"/>
-    </TextBlock>  
-
     <Grid ColumnDefinitions="200, *" Background="#D2D2D2">
         <!-- ChatRooms Component -->
         <local:ChatRooms DataContext="{Binding ChatRoomsViewModel}" />

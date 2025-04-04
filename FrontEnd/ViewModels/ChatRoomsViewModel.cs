@@ -11,9 +11,11 @@ namespace FrontEnd.ViewModels
   public class ChatRoomsViewModel : ReactiveObject
   {
     private readonly ChatService _chatService;
+    public string Username { get; }
 
-    public ChatRoomsViewModel(ChatService chatService)
+    public ChatRoomsViewModel(ChatService chatService, string username)
     {
+      Username = username;
       _chatService = chatService;
       Conversations = new ObservableCollection<Conversation>();
       CreateConversationCommand = ReactiveCommand.Create(CreateConversation);
