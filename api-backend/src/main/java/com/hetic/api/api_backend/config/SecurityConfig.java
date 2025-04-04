@@ -36,7 +36,6 @@ public class SecurityConfig {
     }
 
 
-    // 🔥 Définition des règles CORS pour l'ensemble de l'application
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
